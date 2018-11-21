@@ -27,7 +27,7 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Frouks</p>
+               <a href="http://frouks.nl/index-nl.html" target="_blank"><p>Frouks</p></a>
                 <li>
                     <a href="index.php">Home</a>
                 </li>
