@@ -9,7 +9,7 @@
 <body>
 <form method="post" action="process_upload.php" enctype="multipart/form-data">
 <div class="upload-btn-wrapper">
-  <button class="btn">Yeet meme here</button>
+ 
   <input type="file" name="myfile" />
 </div>
   <label><p>Title:</p><input type="text" name="title" /></label><br><br>
