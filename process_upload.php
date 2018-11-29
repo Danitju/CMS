@@ -4,7 +4,12 @@
 //image in de juiste map zetten
 $temp_location = $_FILES['myfile']['tmp_name'];
 $target_location = 'images/' . time() . $_FILES['myfile']['name'];
-
+$mime = mime_content_type($temp_location); 
+if(
+    substr($mime,0,5) !== 'image'
+){
+    echo 'Je mag alleen plaatjes uploaden.'; exit;
+}
 move_uploaded_file($temp_location, $target_location) or die ('Error moving file.');
 
 
