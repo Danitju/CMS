@@ -79,7 +79,9 @@
   <label><p>Title:</p><input type="text" name="title" /></label><br><br>
   <label><p>Description:</p><input type="text" name="description" /></label><br><br>
   <input class="button" type="submit"  name="submit_image" value="Foto Uploaden!" />
-</form> </p>
+</form> 
+
+</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
             <div class="line"></div>

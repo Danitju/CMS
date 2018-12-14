@@ -8,9 +8,8 @@
 
 </head>
 <body>
-<h1 class="title1">Badmemes</h1>
+<h1 class="title1">Frouks</h1>
 <div class="upload">
-<a href="index.php"><h2>UPLOAD HERE</h2></a>
 </div>
 <?php 
 $mysqli = new mysqli('localhost', 'root', 'root', '24994_db') or die ('Error connecting');
@@ -19,18 +18,20 @@ $stmt = $mysqli->prepare($query) or die ('Error preparing');
 $stmt->bind_result($location, $title,$description) or die ('Error binding results');
 $stmt->execute() or die ('Error executing');
 
-echo '<div class="masonry">';
+echo '<div class="main">';
+echo '<section>';
 while ($succes = $stmt->fetch()){
     
-    echo '<div class="item">';
-    echo '<img src="' . $location . '" />';
-    echo ' ' . $title . '<br>';
-    echo ' ' . $description . '<br>'; 
+    echo '<div class="grid-container grid-columns-three">';
+    echo '<img class="thumbnail" src="' . $location . '" />';
+    // echo ' ' . $title . '<br>';
+    // echo ' ' . $description . '<br>'; 
     echo '</div>';
 
   
 
 }
+echo '</section>';
 echo '</div>';
 ?>
 </body>
