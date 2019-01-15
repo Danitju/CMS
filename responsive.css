@@ -1,0 +1,50 @@
+
+@media screen and (min-width: 768px){
+	
+	.thumbnail{
+		margin: 0;
+		padding: 0;
+		display: block;
+		width: 175px;
+	}
+	
+	.grid-container{
+		display: grid;
+		justify-content: center;
+		grid-column-gap: 150px;
+		grid-row-gap: 75px;
+		grid-template-columns: repeat(2, min-content);
+	}
+	
+}
+
+
+@media screen and (min-width: 1024px){
+	
+	.header-main{
+		
+	}
+	
+	.logo{
+		width: 50%;
+	}
+	
+	.menu-button{
+		display: none;
+	}
+	
+	.top-nav{
+	}
+	
+	.nav-item{
+		display: inline-block;
+	}
+	
+	
+	.grid-container{
+		padding: 20px;
+		grid-template-columns: repeat(3, min-content);
+	}
+	
+
+}
