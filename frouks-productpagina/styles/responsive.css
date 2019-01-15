@@ -1,0 +1,190 @@
+
+/***MOBILE***/
+
+@media screen and (min-width: 425px){
+	
+	.item-thumbnail{
+		width: 200px;
+		height: 200px;
+	}
+	
+	.logo{
+		width: 425px;
+	}
+	
+}
+
+
+/***TABLET***/
+@media screen and (min-width: 768px){
+	
+	
+	.logo{
+		width: 600px;
+	}
+	
+	.item-thumbnail{
+		margin: 0 auto;
+		width: 175px;
+		height: 175px;
+	}
+	
+	
+	.section-text{
+		width: 650px;
+		text-align: left;
+		margin: 20px auto;
+	}
+	
+	.grid-container{
+		padding: 40px;
+		display: grid;
+		justify-content: center;
+		grid-column-gap: 150px;
+		grid-row-gap: 75px;
+		grid-template-columns: repeat(2, 200px);
+	}
+	
+		
+}
+
+
+/***LAPTOP/PC***/
+@media screen and (min-width: 1024px){
+	
+	.header-main{	}
+	
+	
+	.logo{
+		width: 680px;
+	}
+	
+	
+	.menu-button{
+		display: none;
+	}
+	
+	
+	.nav-top{
+		/*overflow: hidden;*/
+	}
+	
+	
+	.nav-item{
+		display: inline-block;
+	}
+	
+	
+	.search{
+		display: block;
+	}
+	
+	.lang-settings{
+		display: block;
+	}
+	
+	
+	.search-button{
+		color: #5b4998;
+		cursor: pointer;
+	}
+	
+	
+	.subnav{
+		position: absolute;
+		left: 0;
+		width: 100%;
+	}
+	
+	.subnav-item{
+		display: inline-block;
+		color: #5b4998;
+		cursor: pointer;
+		padding: 0px;
+	}
+	
+	
+	.grid-container{
+		grid-template-columns: repeat(3, 200px);
+	}
+	
+	
+	.grid-columns-four{
+		grid-template-columns: repeat(4, 150px);
+		grid-column-gap: 50px;
+		grid-row-gap: 50px;		
+	}
+	
+	
+	
+	.grid-columns-four .item-thumbnail{
+		width: 125px;
+		height: 125px;
+	}
+	
+	
+	.item-title{
+		font-size: 18px;
+	}
+	
+	
+	.item-thumbnail{
+		cursor: pointer;
+	}
+	
+	
+	.item-description{
+		display: none;
+		bottom: 0%;
+		left: 25%;
+		background: #fff;
+		border: solid 5px #5b4998;
+		color: #5b4998;
+		border-radius: 10px;
+		margin: 10px;
+		padding: 20px;
+		position: fixed;
+	}
+	
+
+	.item-thumbnail:hover ~ .item-description{
+		display: block;
+	}
+	
+	
+	
+	.figure{
+		border-radius: 200px 10px 10px 200px;
+		overflow: hidden;
+		width: 840px;
+		height: 410px;
+		margin: 40px auto;
+		background: #fff;
+		/*border: solid 5px #5b4998;*/
+	}
+	
+	.figure-right{
+		border-radius: 10px 200px 200px 10px;
+	}
+
+	
+	.figure-image{
+		width: 510px;
+	}
+	
+	
+	.figure-text{
+		box-sizing: border-box;
+		padding: 10px;
+		width: 330px;
+		height: 410px;
+		color: #5b4998;
+	}
+	
+	
+	.figure-text, .figure-image{
+		float: left;
+	}
+	
+	
+}
