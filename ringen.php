@@ -25,18 +25,20 @@
 			</nav>
 		</header><!--END HEADER-->
 <?php 
-$mysqli = new mysqli('localhost', 'root', 'root', '24994_db') or die ('Error connecting');
-$query = "SELECT location, title,image_id, description FROM images ORDER BY image_id DESC";
-$stmt = $mysqli->prepare($query) or die ('Error preparing');
-$stmt->bind_result($location, $title,$image_id,$description) or die ('Error binding results');
-$stmt->execute() or die ('Error executing');
+require "include/db.php";
+$db=dbConnect();
+$products = get_product_type('ringen',$db);
+
+//Elke keer dit stukje pakken en dan "ringen" veranderen.
+
+
 ?>
 <main>
 <section>
 <div class="grid-container grid-columns-three">
-<?php while ($succes = $stmt->fetch()):?>
-    <a href="product.php?product_id=<?php echo $image_id?>"> <img class="thumbnail" src="<?php echo $location ?>"></a>
-<?php endwhile; ?>
+<?php foreach ($products as $product):?>
+    <a href="product.php?product_id=<?php echo $product['image_id']?>"> <img class="thumbnail" src="<?php echo $product['location'] ?>"></a>
+<?php endforeach; ?>
 </div>
 </section>
 </main>
