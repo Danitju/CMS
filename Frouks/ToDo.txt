@@ -1,0 +1,11 @@
+1. Maps aanpassen op Location.
+
+2. About en Workshops responsive maken.
+
+3. Subnavigatie aanpassen.
+
+4. Search.
+
+5. Footer aanpassen.
+
+6. Engelse vertaling.
