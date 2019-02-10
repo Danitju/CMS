@@ -1,10 +1,13 @@
 <?php
 
 require "include/db.php";
-$db=dbConnect();
+$type_id = $_GET['type_id'];
 
+$db=dbConnect();
 $productid=$_GET['product_id'];
 $product=get_product($productid,$db);
+$types=get_product_types($db);
+$products = get_product_type($type_id,$db);
 
 // print_r($product);
 ?>
@@ -16,6 +19,8 @@ $product=get_product($productid,$db);
 	<head>
 		<title>Collectie</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="styleGrid.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 		<link rel="stylesheet" href="styles/style.css">
 		 <link rel="stylesheet" href="styles/product_page.css">
 		<link rel="stylesheet" href="styles/responsive.css">
@@ -37,13 +42,12 @@ $product=get_product($productid,$db);
 				<ul>
 					<li class="nav-item dropdown"><a href="collection.html">Collectie <i class="fas fa-caret-down dropdown"></i></a>
 						<ul class="subnav">
-							<li class="subnav-item" id="rings"><a>Ringen</a></li>
-							<li class="subnav-item" id="earrings"><a>Oorbellen</a></li>
-							<li class="subnav-item" id="necklaces"><a>Kettingen</a></li>
-							<li class="subnav-item" id="bracelets"><a>Armbanden</a></li>
-							<li class="subnav-item" id="weddingsbands"><a>Trouwringen</a></li>
-							<li class="subnav-item" id="cufflinks"><a>Manchetknopen</a></li>
-							<li class="subnav-item" id="specials"><a>specials</a></li>
+
+						<?php foreach ($types as $type):?>
+							<li class="subnav-item" id="rings"><a href="type.php?type_id=<?php echo $type['id']?>"><?php echo ucfirst( $type['naam'])?></a></li>
+							<?php endforeach ?>
+
+							<!-- Deze foreach moet elke keer gepaste worden in het menu. Dit is om de catogorien te laten zien -->
 						</ul>
 					</li>
 					<li class="nav-item"><a href="workshops.html">Workshops</a></li>
@@ -55,21 +59,27 @@ $product=get_product($productid,$db);
 				</ul>
 			</nav>
 		</header>
-		<main class="main">
-			<div class="product-content">
-				<div class="flexbox-container">
-					<img class="product-img" src="<?php echo $product['location']; ?>" alt="Afbeelding van product">
-				</div>
-				<div class="flexbox-container">
-					<div class="name-block"><span class="product-name"><?php echo $product['title']; ?></span></div>
-					<div class="price-block"><span class="product-price"><?php echo $product['price']; ?></span></div>
-					<div class="product-desc">
-					<?php echo $product['description']; ?>
-					</div>
-					<a class="purchase" href="#purchase">Kopen</a>
-				</div>
-			</div>
-		</main>
-		<script src="scripts/script.js"></script>
+        
+        <?php 
+$type_id = $_GET['type_id'];
+require "include/db.php";
+$db=dbConnect();
+$products = get_product_type($type_id,$db);
+$types=get_product_types($db);
+
+
+
+?>
+<main>
+<section>
+<div class="grid-container grid-columns-three">
+<?php foreach ($products as $product):?>
+    <a href="product.php?product_id=<?php echo $product['image_id']?>"> <img class="thumbnail" src="<?php echo $product['location'] ?>"></a>
+<?php endforeach; ?>
+</div>
+</section>
+</main>
+<script src="scripts/script.js"></script>
 	</body>
 </html>
+
