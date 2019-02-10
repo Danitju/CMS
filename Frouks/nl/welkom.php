@@ -1,14 +1,31 @@
 <?php
 require "include/db.php";
-$db=dbConnect();
-$type_id = $_GET['type_id'];
-$products = get_product_type($type_id,$db);
-$productid=$_GET['product_id'];
-$types=get_product_types($db);
+$db = dbConnect();
+// extra check toegevoegd: als type_id niet is opgegeven dan standaard op 1 zetten (mag je ook andere van maken natuurlijk)
+$type_id = isset($_GET['type_id']) ? (int) $_GET['type_id'] : 1; 
 
+// Hier zet ik alle variabelen voor de pagination
+$results_per_page = 1;
+
+//Hier roep ik een nieuwe functie aan die alleen het aantal producten/images telt in de de database, check in db.php
+$number_of_pages = count_product_type_pages($type_id, $results_per_page, $db);
+
+// Jouw code die checkt op page number
+if (!isset($_GET['page'])) {
+	$page = 1;
+} else {
+	$page = (int) $_GET['page']; // met (int) zet je een variabele om van een string, bijvoorbeeld: "1", naar een integer: 1.
+}
+// Heb dus twee extra parameters aan de function 'get_product_type' toegevoegd, het paginanummer en het aantal resultaten per pagina
+// In die 'get_product_type' functie wordt dus de juiste query gedaan, zodat je die functie EN pagination ook op andere plekken kunt gebruiken...!
+// Zo hoef is jouw hele lap code die eerst onderin de pagina stond niet meer nodig, snap je? Ik heb gewoon die ene functie slimmer gemaakt.
+$products = get_product_type($type_id, $db, $page, $results_per_page);
+
+//Deze wordt niet gebruikt volgens mij? 
+//$productid = $_GET['product_id'];
+
+$types = get_product_types($db);
 ?>
-
-
 <!DOCTYPE html><!--HEADER-->
 <html><!--HOMEPAGE-->
 	<head>
@@ -34,8 +51,8 @@ $types=get_product_types($db);
 				<ul>
 					<li class="nav-item dropdown"><a href="welkom.php">Collectie <i class="fas fa-caret-down dropdown-icon"></i></a>
 						<ul class="subnav">
-						<?php foreach ($types as $type):?>
-							<li class="subnav-item" id="rings"><a href="type.php?type_id=<?php echo $type['id']?>"><?php echo ucfirst( $type['naam'])?></a></li>
+						<?php foreach ($types as $type) : ?>
+							<li class="subnav-item" id="rings"><a href="type.php?type_id=<?php echo $type['id'] ?>"><?php echo ucfirst($type['naam']) ?></a></li>
 							<?php endforeach ?>
 						</ul>
 					</li>
@@ -48,63 +65,21 @@ $types=get_product_types($db);
 				</ul>
 			</nav>
 		</header>
-<?php 
-$mysqli = new mysqli('localhost', 'root', 'root', '24994_db') or die ('Error connecting');
-$query = "SELECT location, title,image_id, description FROM images ORDER BY image_id DESC";
-$stmt = $mysqli->prepare($query) or die ('Error preparing');
-$stmt->bind_result($location, $title,$image_id,$description) or die ('Error binding results');
-$stmt->execute() or die ('Error executing');
-?>
 <main>
 <section>
+	<div class="grid-container grid-columns-three">
+	<?php foreach ($products as $product) : ?>
+		<a href="product.php?product_id=<?php echo $product['image_id'] ?>"> <img class="thumbnail" src="<?php echo $product['location'] ?>"></a>
+	<?php endforeach; ?>
 
-
-
-<div class="grid-container grid-columns-three">
-<?php while ($succes = $stmt->fetch()):?>
-    <a href="product.php?product_id=<?php echo $image_id?>"> <img class="thumbnail" src="<?php echo $location ?>"></a>
-<?php endwhile; 
-
-
-
-$con = mysqli_connect('localhost','root','root');
-    mysqli_select_db($con, '24994_db');
-
-    $result_per_page = 5;
-
-    $sql = "SELECT * FROM images";
-    $result = mysqli_query($con,$sql);
-    $number_of_results = mysqli_num_rows($result);
-
-  
-    $number_of_pages = ceil($number_of_results/$result_per_page);
-
-    if (!isset($_GET['page'])){
-        $page = 1;        
-    } else{
-        $page = $_GET['page'];
-    }
-
-    echo $this_page_first_result = ($page-1)*$result_per_page;
-
-    $sql = "SELECT * from images LIMIT " . $this_page_first_result . ',' . $result_per_page;
-    $result = mysqli_query($con, $sql);?>
-
-   <?php while($row =$stmt->fetch()):?>
-		<a href="product.php?product_id=<?php echo $image_id?>"> <img class="thumbnail" src="<?php echo $location ?>"></a>
-<?php endwhile;
-
-
-    for ($page=1;$page<=$number_of_pages;$page++) {
-        echo '<a href="welkom.php?page=' . $page . '">' . $page . '</a>';
-    }
-
-?>
-</div>
-
+	<?php
+	for ($page = 1; $page <= $number_of_pages; $page++) {
+		echo '<a href="welkom.php?page=' . $page . '">' . $page . '</a>';
+	}
+	?>
+	</div>
 </section>
-
 </main>
 <script src="scripts/script.js"></script>
-	</body>
+</body>
 </html>
